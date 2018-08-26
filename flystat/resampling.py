@@ -108,8 +108,8 @@ def probability_we_assign_correct_distribution_to_random_data_point_grouping(dat
     return assignments_probabilities
 
 def calculate_louvain_communities(assignment_matrix, node_order=None):
-   import networkx, community 
-   # Calculate louvain communities
+    import networkx, community 
+    # Calculate louvain communities
     G = networkx.to_networkx_graph(assignment_matrix, create_using=networkx.Graph())  
     louvain_community_dict = community.best_partition(G)
     # Convert community assignmet dict into list of communities
