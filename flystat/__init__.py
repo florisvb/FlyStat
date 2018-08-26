@@ -1,1 +1,1 @@
-import resampling
+from . import resampling

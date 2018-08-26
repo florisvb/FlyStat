@@ -113,12 +113,12 @@ def calculate_louvain_communities(assignment_matrix, node_order=None):
     louvain_community_dict = community.best_partition(G)
     # Convert community assignmet dict into list of communities
     louvain_comms = {}
-    for node_index, comm_id in louvain_community_dict.iteritems():
-        if comm_id in louvain_comms.keys():
+    for node_index, comm_id in louvain_community_dict.items():
+        if comm_id in list(louvain_comms.keys()):
             louvain_comms[comm_id].append(node_index)
         else:
             louvain_comms.setdefault(comm_id, [node_index])
-    nodes_louvain_ordered = [node for comm in louvain_comms.values() for node in comm]
+    nodes_louvain_ordered = [node for comm in list(louvain_comms.values()) for node in comm]
     # reorder original matrix according to node order
     adjacency_matrix = np.zeros_like(assignment_matrix)
     for i in range(assignment_matrix.shape[0]):
@@ -131,9 +131,9 @@ def calculate_louvain_communities(assignment_matrix, node_order=None):
 def recalculate_probabilities_after_merging_groups(data, louvain_community_dict):
     # Convert community assignmet dict into list of communities
     louvain_comms = defaultdict(list)
-    for node_index, comm_id in louvain_community_dict.iteritems():
+    for node_index, comm_id in louvain_community_dict.items():
         louvain_comms[comm_id].append(node_index)
-    louvain_comms = louvain_comms.values()
+    louvain_comms = list(louvain_comms.values())
     new_data = []
     for community in louvain_comms:
         dataset = []
