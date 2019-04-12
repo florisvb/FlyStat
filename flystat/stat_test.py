@@ -12,8 +12,7 @@ import matplotlib.pyplot as plt
 def test():
     data1, data2 = get_two_datasets(100)
     plot_data(data1, data2)
-    print resampling.calc_statistical_significance_through_resampling(data1, data2, analysis='median')
-
+    print( resampling.calc_statistical_significance_through_resampling(data1, data2, analysis='median'))
 def plot_data(data1, data2):
     m1 = np.median(data1)
     m2 = np.median(data2)
@@ -50,7 +49,7 @@ def iterate_conf_check(n=100):
     power1s = []
     power2s = []
     for i in range(n):
-        print i
+        print (i)
         data1, data2 = get_two_datasets(50)
         dconf = plot_data(data1, data2)
         pval, power1, power2 = resampling.plot_calc_statistical_significance_through_resampling(data1, data2, analysis='median')
@@ -79,8 +78,8 @@ def iterate_conf_check(n=100):
         dconf_incorrectly_predicts_not_signficant = len( np.where( dconfs[p05] < 0 )[0] ) / float(len(dconfs[p05])) # type 1 error
         dconf_incorrectly_predicts_signficant = len( np.where( dconfs[p95] > 0 )[0] ) / float(len(dconfs[p95])) # type 2 error
         
-        print dconf_incorrectly_predicts_not_signficant # fails to reject null hypothesis
-        print dconf_incorrectly_predicts_signficant # fails to accept null hypothesis
+        print (dconf_incorrectly_predicts_not_signficant) # fails to reject null hypothesis
+        print (dconf_incorrectly_predicts_signficant) # fails to accept null hypothesis
 
     if 1:
         p05 = np.where(pvals<0.05)[0]
@@ -89,9 +88,9 @@ def iterate_conf_check(n=100):
         dconf_incorrectly_predicts_not_significant = len( np.where( dconfs[p05] < 0 )[0] ) 
         dconf_incorrectly_predicts_significant = len( np.where( dconfs[p95] > 0 )[0] ) 
         
-        print 'Probability conf interval disagrees with resampling stat: ', (dconf_incorrectly_predicts_not_significant + dconf_incorrectly_predicts_significant) / float(len(dconfs))
-        print dconf_incorrectly_predicts_not_significant # fails to reject null hypothesis
-        print dconf_incorrectly_predicts_significant # fails to accept null hypothesis
+        print ('Probability conf interval disagrees with resampling stat: ', (dconf_incorrectly_predicts_not_significant + dconf_incorrectly_predicts_significant) / float(len(dconfs)))
+        print (dconf_incorrectly_predicts_not_significant) # fails to reject null hypothesis
+        print (dconf_incorrectly_predicts_significant) # fails to accept null hypothesis
     
     #return pvals, dconfs
 
