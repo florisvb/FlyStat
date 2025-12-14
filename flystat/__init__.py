@@ -1,1 +1,1 @@
-import resampling
+from flystat import resampling
